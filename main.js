@@ -27,19 +27,15 @@ $(document).ready(function(){
   };
 
   function clickTile(event){
-    console.log(event.target.classList.contains('played'));
-    if (event.target.classList.contains('played')) {
-      alert("Square already played")
-    } else {
+    if (!event.target.classList.contains('played')){
       makeMove(personToken, event.target.id);
-      if(!checkForWin(personToken, currentBoard) && !checkForTie()){
+    }
+    if(!checkForWin(personToken, currentBoard) && !checkForTie()){
         makeMove(computerToken, computerMove());
-      }
     }
   };
 
   function makeMove(currentPlayer, tileNumber){
-    console.log(currentPlayer);
     currentBoard[tileNumber] = currentPlayer;
     $("#" + tileNumber).html(currentPlayer).off('click').addClass("played");
     if(checkForWin(currentPlayer, currentBoard)) {
@@ -82,7 +78,7 @@ $(document).ready(function(){
   function winGame(winner) {
     $('.tile').off();
     if (winner === personToken) {
-      personWins++;
+      playerWinss++;
       $('#playerScore').html(playerWins);
       $("#winModal").modal();
     } else {
